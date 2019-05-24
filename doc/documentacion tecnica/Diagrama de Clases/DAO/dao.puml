@@ -1,0 +1,15 @@
+@startuml
+
+CrudDAO <|-- CrudDAOHibernate
+
+interface CrudDAO{
+        + create(T entity): T entity
+        + return(int id): T entity
+        + update(T entity): T entity
+        + destroy(T entity): void
+}
+class CrudDAOHibernate
+
+
+
+@enduml

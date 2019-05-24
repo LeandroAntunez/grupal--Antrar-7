@@ -1,0 +1,19 @@
+image: docker:latest
+
+
+variables:
+  # Configura las variables de entorno de MySQL (https://hub.docker.com/r/_/mysql/).
+  MYSQL_DATABASE: mensajeria
+  MYSQL_ROOT_PASSWORD: root
+
+maven-build:
+  services:
+    - docker:dind
+    - mysql:latest
+  #image: maven:3-jdk-8
+  script:
+    #- echo "SELECT 'OK';" | mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -h mysql "$MYSQL_DATABASE"
+    - docker ps
+    - docker images
+
+

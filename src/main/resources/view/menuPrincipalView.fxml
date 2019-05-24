@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ar.edu.unq.eis.antrar.frontend.controller.MenuPrincipalController">
+   <children>
+   <Text layoutX="50.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menú Principal" textAlignment="CENTER" wrappingWidth="287.6708984375" AnchorPane.topAnchor="31.310546875">
+      <font>
+         <Font name="System Bold" size="34.0" />
+      </font>
+   </Text>
+   <Button fx:id="btnMoto" alignment="CENTER" layoutX="43.0" layoutY="215.0" mnemonicParsing="false" onAction="#abrirFormularioParaMoto" prefHeight="40.0" prefWidth="301.0" text="Moto">
+         <font>
+            <Font name="Arial" size="21.0" />
+         </font>
+      </Button>
+   <Button alignment="CENTER" layoutX="43.0" layoutY="157.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="301.0" text="Cliente">
+         <font>
+            <Font name="Arial" size="21.0" />
+         </font>
+      </Button>
+   <Button fx:id="btnFactura" alignment="CENTER" layoutX="43.0" layoutY="272.0" mnemonicParsing="false" onAction="#irAlMenuDeFacturacion" prefHeight="40.0" prefWidth="301.0" text="Factura">
+         <font>
+            <Font name="Arial" size="21.0" />
+         </font>
+      </Button>
+      <Button alignment="CENTER" layoutX="43.0" layoutY="329.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="301.0" text="Localidades">
+         <font>
+            <Font name="Arial" size="21.0" />
+         </font>
+      </Button>
+   <Button fx:id="btnViajes" alignment="CENTER" layoutX="43.0" layoutY="99.0" mnemonicParsing="false" onAction="#irAlFormularioDeViajes" prefHeight="40.0" prefWidth="301.0" text="Viaje" AnchorPane.rightAnchor="56.0">
+         <font>
+            <Font name="Arial" size="21.0" />
+         </font>
+      </Button>
+   </children>
+
+</AnchorPane>

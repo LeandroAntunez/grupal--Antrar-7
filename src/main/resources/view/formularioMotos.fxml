@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="427.0" prefWidth="773.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ar.edu.unq.eis.antrar.frontend.controller.FormularioMotoController">
+	<children>
+		<SplitPane dividerPositions="0.4198675496688742" layoutX="66.0" layoutY="121.0" prefHeight="383.0" prefWidth="739.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<items>
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="408.0" prefWidth="278.0">
+					<children>
+						<GridPane layoutX="10.0" prefHeight="189.0" prefWidth="306.0" AnchorPane.bottomAnchor="236.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0">
+							<columnConstraints>
+								<ColumnConstraints fillWidth="false" halignment="RIGHT" maxWidth="250.0" minWidth="10.0" prefWidth="124.0" />
+								<ColumnConstraints hgrow="SOMETIMES" maxWidth="346.0" minWidth="10.0" prefWidth="211.0" />
+							</columnConstraints>
+							<rowConstraints>
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+							</rowConstraints>
+							<children>
+								<Label prefHeight="17.0" prefWidth="63.0" text="Nombres" GridPane.halignment="RIGHT">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<Label prefHeight="17.0" prefWidth="59.0" text="Apellido" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<Label prefHeight="17.0" prefWidth="62.0" text="Domicilio" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<TextField fx:id="txtNombre" prefHeight="25.0" prefWidth="96.0" GridPane.columnIndex="1">
+									<GridPane.margin>
+										<Insets left="5.0" />
+									</GridPane.margin>
+								</TextField>
+								<TextField fx:id="txtApellido" prefHeight="25.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+									<GridPane.margin>
+										<Insets left="5.0" />
+									</GridPane.margin>
+								</TextField>
+								<TextField fx:id="txtDomicilio" GridPane.columnIndex="1" GridPane.rowIndex="3">
+									<GridPane.margin>
+										<Insets left="5.0" />
+									</GridPane.margin>
+								</TextField>
+								<Label prefHeight="17.0" prefWidth="39.0" text="Dni" GridPane.rowIndex="2">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+								<TextField fx:id="txtDni" GridPane.columnIndex="1" GridPane.rowIndex="2">
+									<GridPane.margin>
+										<Insets left="5.0" />
+									</GridPane.margin>
+								</TextField>
+								<DatePicker fx:id="datPkrFec_nac" GridPane.columnIndex="1" GridPane.rowIndex="4">
+									<GridPane.margin>
+										<Insets left="5.0" />
+									</GridPane.margin>
+								</DatePicker>
+								<Label prefHeight="17.0" prefWidth="122.0" text="Fecha de nacimiento" GridPane.rowIndex="4">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+									<font>
+										<Font size="9.0" />
+									</font>
+								</Label>
+								<TextField fx:id="txtCodigoMoto" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+									<GridPane.margin>
+										<Insets left="5.0" />
+									</GridPane.margin>
+								</TextField>
+								<Label prefHeight="17.0" prefWidth="62.0" text="Codigo" GridPane.rowIndex="5">
+									<padding>
+										<Insets right="5.0" />
+									</padding>
+								</Label>
+							</children>
+						</GridPane>
+						<HBox layoutX="6.0" layoutY="356.0" prefHeight="38.0" prefWidth="306.0" spacing="5.0">
+							<children>
+								<Button fx:id="btnGuardarMoto" mnemonicParsing="false" onAction="#guardarMoto" text="Guardar" />
+								<Button fx:id="btnActualizarMoto" mnemonicParsing="false" text="Actualixzar" />
+								<Button fx:id="btnEliminarMoto" mnemonicParsing="false" text="Eliminar" />
+								<Button fx:id="btnNuevaMoto" mnemonicParsing="false" onAction="#limpiarFormularioMoto" text="Nuevo" />
+							</children>
+						</HBox>
+					</children>
+				</AnchorPane>
+				<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+					<children>
+						<TableView fx:id="tablaMotos" prefHeight="425.0" prefWidth="395.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+							<columns>
+								<TableColumn fx:id="columnaApellido" prefWidth="62.0" text="Apellidos" />
+								<TableColumn prefWidth="75.0" text="Nombres" />
+								<TableColumn prefWidth="73.0" text="Dni" />
+								<TableColumn prefWidth="90.0" text="Domicilio" />
+								<TableColumn prefWidth="79.0" text="F. de nacimiento" />
+								<TableColumn prefWidth="79.0" text="Codigo" />
+							</columns>
+						</TableView>
+					</children>
+				</AnchorPane>
+			</items>
+		</SplitPane>
+	</children>
+</AnchorPane>

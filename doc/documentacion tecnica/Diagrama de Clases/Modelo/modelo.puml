@@ -1,0 +1,116 @@
+@startuml
+
+Entidad <|-- Empleado
+Entidad <|-- Cliente
+
+TipoMovimiento <|-- Factura
+TipoMovimiento <|-- Pago
+
+
+Viaje "n" o-- "1" Localidad :hasta
+Viaje "n" o--o "1" Cliente :cliente
+Viaje "n" o--o "1" Empleado :empleado
+
+PlanillaDiaria "1" o-- "n" Viaje
+Cliente "n" o-- "1" Localidad :localidad
+
+Factura "n" o-- "1" TipoFactura :tipoFactura
+
+CuentaCorriente "1" o-- "n" Movimiento :movimientos
+
+Movimiento "n" o-- "1" TipoMovimiento
+
+class PlanillaDiaria{
+      + fecha: date
+}
+
+abstract Entidad{
+      + id: int
+      + domicilio: string
+      + telefono: int
+      + valorHsComunes: float
+      + valorHsMitad: float
+      + valorKilometro: float
+    }
+
+class Empleado{
+      + nombreYApellido: string
+      + datosMoto: string
+      + fechaIngreso: date
+    }
+
+class Cliente {
+      + razonSocial: string
+      + contacto: string
+      + cuit: int
+      + hsCadete: float
+      + saldoAnterior: float
+      + factura: string
+      + inscripto: bool
+    }
+
+class Localidad {
+      + id: int
+      + nombre: string
+      + importe: float
+      + horas: float
+      + kilometros: float
+}
+
+
+class Viaje {
+      + id: int
+      + hora: date
+      + solicito: string
+      + desde: string
+      + observacion: string
+      + hsComunes: float
+      + hsMitad: float
+      + kilometros: float
+      + hsCaP: float
+      + montoHsComunes: float
+      + montoHsMitad: float
+      + montoKilometros: float
+}
+
+class CuentaCorriente {
+      + id: int
+}
+
+class Movimiento {
+      + id: int
+      + fecha: date
+      + descripcion: string
+      + monto: float
+
+}
+
+abstract TipoMovimiento {
+      + id: int
+      + fecha: date
+      + descripcion: string
+}
+
+class Factura {
+      + importeBruto: float
+      + importeNeto: float
+}
+
+class Pago {
+      + importe: float
+}
+
+enum TipoFactura {
+       A
+       B
+}
+
+class ItemBalance {
+      + id: int
+      + descripcion: string
+      + importe: float
+}
+
+
+
+@enduml

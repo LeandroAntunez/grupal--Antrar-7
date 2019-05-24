@@ -1,0 +1,8 @@
+/.idea/
+/.settings/
+.project
+.classpath
+src/test/resources/
+src/test/java/ar/edu/unq/eis/antrar/backend/dao/
+target/
+/src/main/resources/hibernate.cfg.xml

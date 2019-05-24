@@ -1,0 +1,197 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ar.edu.unq.eis</groupId>
+  <artifactId>antrar</artifactId>
+  <version>0.1</version>
+  <name>grupal--Antunez-Araoz-Trolio-7</name>
+  
+  <dependencies>
+  		<!-- Persistencia -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.2.2.Final</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.39</version>
+		</dependency>
+		
+		
+		<!-- Tests -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+		</dependency>
+		
+  </dependencies>
+  
+  
+  <properties>
+  	<sonar.junit.reportsPath>target/surefire-reports</sonar.junit.reportsPath>
+	<sonar.jacoco.reportPath>target/coverage-reports/jacoco-ut.exec</sonar.jacoco.reportPath>
+  </properties>
+  
+  <build>
+  
+  	<plugins>
+
+        <!-- Herramienta para administrar imagenes del docker en Maven. En este caso, una imagen de MySQL.  -->
+
+		<plugin>
+			<groupId>io.fabric8</groupId>
+			<artifactId>docker-maven-plugin</artifactId>
+			<version>0.20.1</version>
+			<extensions>true</extensions>
+			<configuration>
+				<images>
+					<image>
+						<alias>database</alias>
+						<name>mysql:5.7</name>
+						<run>
+							<wait>
+								<log>mysqld: ready for connections</log>
+								<time>20000</time>
+							</wait>
+							<env>
+								<MYSQL_ROOT_PASSWORD>root</MYSQL_ROOT_PASSWORD>
+								<MYSQL_DATABASE>Mensajeria</MYSQL_DATABASE>
+								<MYSQL_USER>root</MYSQL_USER>
+								<MYSQL_PASSWORD>root</MYSQL_PASSWORD>
+							</env>
+							<ports>
+								<port>3307:3307</port>
+							</ports>
+						</run>
+					</image>
+					<image>
+						<name>mvndemo</name>
+						<build>
+							<from>java:8-jre</from>
+							<assembly>
+								<descriptorRef>artifact</descriptorRef>
+							</assembly>
+						</build>
+					</image>
+				</images>
+			</configuration>
+			<executions>
+				<execution>
+					<id>docker:start</id>
+					<phase>pre-integration-test</phase>
+					<goals>
+						<goal>start</goal>
+					</goals>
+				</execution>
+				<execution>
+					<id>docker:stop</id>
+					<phase>post-integration-test</phase>
+					<goals>
+						<goal>stop</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+
+        <!-- Failsafe ejecuta pruebas de integracion.  -->
+
+		<plugin>
+		    <artifactId>maven-failsafe-plugin</artifactId>
+		    <version>2.20.1</version>
+		    <executions>
+			    <execution>
+				    <id>integration-test</id>
+				    <goals>
+					    <goal>integration-test</goal>
+				    </goals>
+			    </execution>
+			    <execution>
+				    <id>verify</id>
+				    <goals>
+					    <goal>verify</goal>
+				    </goals>
+			    </execution>
+		    </executions>
+		    <configuration>
+                <parallel>methods</parallel>
+                <threadCount>10</threadCount>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.maven.surefire</groupId>
+                    <artifactId>surefire-junit47</artifactId>
+                    <version>2.20.1</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+
+        <!-- Compilador de herramientas de Maven para JavaSE-1.8  -->
+
+    	<plugin>
+        	<groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.7.0</version>
+            <configuration>
+              <source>1.8</source>
+              <target>1.8</target>
+            </configuration>
+        </plugin>
+        
+        <!-- Permite el uso de herramientas de JavaFX en un proyecto Maven.  -->
+        
+        <plugin>
+    		<groupId>com.zenjava</groupId>
+    		<artifactId>javafx-maven-plugin</artifactId>
+    		<version>8.8.3</version>
+    		<configuration>
+        		<mainClass>ar.edu.unq.eis.antrar.main</mainClass>
+    		</configuration>
+		</plugin>
+		
+		<!-- Jacoco recolecta informacion de cobertura de test.  -->
+		
+		<plugin>
+    		<groupId>org.jacoco</groupId>
+    		<artifactId>jacoco-maven-plugin</artifactId>
+    		<version>0.7.7.201606060606</version>
+    		<executions>
+      				<execution>
+        				<id>pre-unit-test</id>
+        				<goals><goal>prepare-agent</goal></goals>
+        				<configuration>
+          					<destFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</destFile>
+          					<propertyName>surefireArgLine</propertyName>
+        				</configuration>
+      				</execution>
+      				<execution>
+        				<id>post-unit-test</id>
+        				<phase>test</phase>
+        				<goals><goal>report</goal></goals>
+        				<configuration>
+          					<dataFile>${project.build.directory}/coverage-reports/jacoco-ut.exec</dataFile>
+          					<outputDirectory>${project.reporting.outputDirectory}/jacoco-ut</outputDirectory>
+        				</configuration>
+      				</execution>
+    		</executions>
+		</plugin>
+		
+		<!-- Surefire ejecuta pruebas unitarias. -->
+		
+		<plugin>
+    		<groupId>org.apache.maven.plugins</groupId>
+    		<artifactId>maven-surefire-plugin</artifactId>
+    		<version>2.16</version>
+    		<configuration>
+				<reuseForks>false</reuseForks>
+				<forkCount>1</forkCount>
+    		</configuration>
+		</plugin>
+          
+     </plugins>
+        
+ </build>
+  
+</project>
